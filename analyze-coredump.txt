@@ -1,0 +1,11 @@
+
+cat /proc/sys/kernel/core_pattern
+
+coredumpctl list --no-pager | tail -n 20
+
+coredumpctl info <pid> --no-pager
+
+cd /tmp && lz4 -d <storage-path> core.<pid>
+
+gdb -batch -ex 'bt' -ex 'bt full' <Executable> /tmp/core.<pid> 2>&1
+
