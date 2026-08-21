@@ -1,0 +1,8 @@
+1.要检查一个正在运行的卡住的程序的调用栈，等锁情况，如果是debug的bin，可以执行gdb查看bt，如下，
+gdb -batch \
+  -ex "file <debug_bin_file_path>" \
+  -ex "bt" \
+  -p <pid> 2>/dev/null
+可以查看到对应的堆栈信息。
+
+也可使用cat /proc/<pid>/wchan初步检查进程的等锁情况，futex_wait_queue表示在等锁。
